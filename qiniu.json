@@ -1,0 +1,5 @@
+{
+    "ACCESS_KEY": "your qiniu access key",
+    "SECRET_KEY": "your qiniu secret key",
+    "BUCKET": "your qiniu bucket"
+}
