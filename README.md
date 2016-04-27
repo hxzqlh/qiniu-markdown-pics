@@ -16,7 +16,7 @@ pictrue tag may be like:
 
 ```
 pip install qiniu
-pip install validator
+pip install validators
 ```
 
 ## Usage
