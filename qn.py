@@ -143,3 +143,5 @@ if __name__ == '__main__':
     print 'origin markdown file backup in: %s' %(bak_md)
 
     process_md_pic (md)
+
+    os.remove (bak_md)
