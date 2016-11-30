@@ -7,6 +7,7 @@ import json
 import re
 import urllib2
 import tempfile
+import traceback
 import shutil
 from datetime import date
 from qiniu import Auth, put_file, etag, urlsafe_base64_encode
@@ -77,16 +78,17 @@ def process_md_pic (md):
                     old_link = old_link[: old_link.index('?')]
 
                 tmp_pic = tempfile.mkstemp(prefix=('%s_' %yyyymmdd))[1]
-                con = urllib2.urlopen(old_link)
-                if con.getcode() == 200:
-                    data = con.read()
-                    f = open (tmp_pic, 'wb')
-                    f.write(data)
-                    f.close()
-                else:
+                try:
+                    con = urllib2.urlopen(old_link)
+                    if con.getcode() == 200:
+                        data = con.read()
+                        f = open (tmp_pic, 'wb')
+                        f.write(data)
+                        f.close()
+                except Exception, ex:
+                    traceback.print_exc(ex)
                     failure = failure + 1
                     os.remove(tmp_pic)
-                    print 'download failure'
                     continue
 
             ret, qn_pic_link = qn_upload (q, config['BUCKET'], tmp_pic)
